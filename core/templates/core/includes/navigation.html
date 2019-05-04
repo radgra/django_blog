@@ -1,0 +1,17 @@
+<ul class="nav navbar-nav menu_nav justify-content-center">
+    <li class="nav-item active"><a class="nav-link" href="{% url 'blog:index'%}">Home</a></li>
+    <li class="nav-item submenu dropdown">
+        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+            aria-expanded="false">Category</a>
+        <ul class="dropdown-menu">
+            <li class="nav-item"><a class="nav-link" href="blog-details.html">Blog Details</a></li>
+        </ul>
+    </li>
+    {% if user.is_authenticated %}
+    <li class="nav-item"><a class="nav-link" href="{% url 'login_and_register:logout' %}">Logout</a></li>
+    {% else %}
+    <li class="nav-item"><a class="nav-link" href="{% url 'login_and_register:login' %}">Login</a></li>
+    <li class="nav-item"><a class="nav-link" href="{% url 'login_and_register:login' %}">Register</a></li>
+    {% endif %}
+        
+</ul>

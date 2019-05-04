@@ -1,0 +1,22 @@
+{% load humanize %}
+{% load cropping %}
+<section>
+    <div class="container">
+        <div class="owl-carousel owl-theme blog-slider">
+
+            {% for post in featured_posts  %}
+            <div class="card blog__slide text-center">
+                <div class="blog__slide__img">
+                    <img class="card-img rounded-0" src="{% cropped_thumbnail post 'cropping' scale=1 %}" alt="">
+                </div>
+                <div class="blog__slide__content">
+                    <a class="blog__slide__label" href="#">{{post.category.name}}</a>
+                    <h3><a href="#">{{post.title}}</a></h3>
+                    <p>{{post.created_at | timesince}}</p>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+</section>

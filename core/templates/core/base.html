@@ -1,0 +1,17 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+{% include "core/includes/head.html" %}
+<body>
+    {% include "core/includes/header.html" %}
+    {% block content %}{% endblock content %}
+</body>
+<script src="{% static 'core/vendors/jquery/jquery-3.2.1.min.js' %}"></script>
+<script src="{% static 'core/vendors/bootstrap/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'core/vendors/owl-carousel/owl.carousel.min.js' %}"></script>
+<script src="{% static 'core/js/jquery.ajaxchimp.min.js' %}"></script>
+<script src="{% static 'core/js/mail-script.js' %}"></script>
+<script src="{% static 'core/js/main.js' %}"></script>
+{% block scripts %}
+{% endblock%}
+</html>

@@ -1,0 +1,106 @@
+{% extends 'core/base.html' %}
+{% load cropping %}
+<!-- {% load static %} -->
+{% block content %}
+<!--================Header Menu Area =================-->
+
+<!--================Header Menu Area =================-->
+
+<main class="site-main">
+    <!--================Hero Banner start =================-->
+    {% include 'core/includes/hero.html' %}
+
+    <!--================Hero Banner end =================-->
+
+    <!--================ Blog slider start =================-->
+    {% include 'core/includes/slider.html' %}
+
+    <!--================ Blog slider end =================-->
+
+    <!--================ Start Blog Post Area =================-->
+    <section class="blog-post-area section-margin mt-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    {% for post in posts  %}
+
+                    <div class="single-recent-blog-post">
+                        <div class="thumb">
+                            <!-- <img class="img-fluid" src="{{post.image.url}}" alt=""> -->
+                            <img class="img-fluid" src="{% cropped_thumbnail post 'cropping' scale=1 %}" alt="">
+                            <ul class="thumb-info">
+                                <li><a href="#"><i class="ti-user"></i>{{post.author}}</a></li>
+                                <li><a href="#"><i class="ti-notepad"></i>{{post.created_at}}</a></li>
+                                <li><a href="#"><i class="ti-themify-favicon"></i>2 Comments</a></li>
+                            </ul>
+                        </div>
+                        <div class="details mt-20">
+                            <a href="{% url 'blog:post_detail' post.id %}">
+                                <h3>{{post.title}}</h3>
+                            </a>
+                            <p class="tag-list-inline">Tag:
+
+                                {% for tag in post.tag_set.all  %}
+                                <a href="#">{{tag}}</a>{% if forloop.last %} {% else %},{% endif %}
+                                {% endfor %}
+                                <p>{{post.sneekpeek}}</p>
+                                <a class="button" href="{% url 'blog:post_detail' post.id %}">Read More <i
+                                        class="ti-arrow-right"></i></a>
+                        </div>
+                    </div>
+
+
+                    {% endfor %}
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <nav class="blog-pagination justify-content-center d-flex">
+                                {% if posts.has_other_pages %}
+                                <ul class="pagination">
+                                    {% if posts.has_previous %}
+                                    <li class="page-item">
+                                        <a href="?page={{ posts.previous_page_number }}" class="page-link"
+                                            aria-label="Previous">
+                                            <span aria-hidden="true">
+                                                <i class="ti-angle-left"></i>
+                                            </span>
+                                        </a>
+                                    </li>
+                                    {% endif %}
+                                    {% for i in posts.paginator.page_range%}
+                                    {% if posts.number == i %}
+                                    <li class="page-item active"><a href="?page={{ i }}" class="page-link">{{i}}</a>
+                                    </li>
+                                    {% else %}
+                                    <li class="page-item"><a href="?page={{ i }}" class="page-link">{{i}}</a></li>
+                                    {% endif %}
+                                    {% endfor %}
+                                    {% if posts.has_next %}
+                                    <li class="page-item">
+                                        <a href="?page={{ posts.next_page_number }}" class="page-link"
+                                            aria-label="Next">
+                                            <span aria-hidden="true">
+                                                <i class="ti-angle-right"></i>
+                                            </span>
+                                        </a>
+                                    </li>
+                                    {% endif %}
+                                </ul>
+                                {% endif %}
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Start Blog Post Siddebar -->
+                {% include 'core/includes/sidebar.html'%}
+            </div>
+            <!-- End Blog Post Siddebar -->
+        </div>
+    </section>
+    <!--================ End Blog Post Area =================-->
+</main>
+
+<!--================ Start Footer Area =================-->
+{% include 'core/includes/footer.html' %}
+
+{% endblock %}

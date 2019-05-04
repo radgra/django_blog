@@ -1,0 +1,7 @@
+.hero-banner {
+    background: url('/static/core/img/hero-banner.png');
+}
+
+.red-heart {
+    color:red !important;
+}
